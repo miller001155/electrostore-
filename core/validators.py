@@ -7,3 +7,7 @@ def check_age(age):
 def check_phone(phone):
     if len(phone) != 13 or phone[0] != '+':
         raise ValidationError('Проверьте правильность ввода номера')
+
+def check_raiting(value):
+    if value > 10 or value < 1:
+        raise ValidationError('Рейтинг выставляется от 1 до 10')

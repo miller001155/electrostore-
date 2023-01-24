@@ -1,8 +1,8 @@
 from django.db import models
 from django_countries.fields import CountryField
 
-from electrostore.core.abstract_models import AbstractDefaultModel
-from electrostore.core.validators import check_age, check_phone
+from core.abstract_models import AbstractDefaultModel
+from core.validators import check_age, check_phone
 
 
 class Client(AbstractDefaultModel):
@@ -18,6 +18,7 @@ class Client(AbstractDefaultModel):
 
     def __str__(self):
         return self.first_name
+
     class Meta:
         ordering = ('first_name',)
         verbose_name = 'Покупатель'
@@ -32,7 +33,8 @@ class Balance(AbstractDefaultModel):
         on_delete=models.CASCADE,
         verbose_name='покупатель',
     )
-
+    def __str__(self):
+        return self.client
     class Meta:
         ordering = ('value',)
         verbose_name = 'Баланс'
