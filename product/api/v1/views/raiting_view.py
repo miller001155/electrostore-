@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
@@ -12,6 +13,7 @@ class RaitingViewSet(viewsets.ModelViewSet):
     serializer_class = RaitingSerializer
     pagination_class = APIListPagination
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    filter_backends = RaitingFilter
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = RaitingFilter
     search_field = ['value']
     ordering_fields = ['product', 'value']

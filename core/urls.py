@@ -8,6 +8,7 @@ from product.api.v1.views.raiting_view import RaitingViewSet
 from suppliers.api.v1.views.supplier_view import SupplierViewSet
 
 router = DefaultRouter()
+
 router.register(r'balance', BalanceViewSet)
 router.register(r'client', ClientViewSet)
 router.register(r'product', ProductViewSet)

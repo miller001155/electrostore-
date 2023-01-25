@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -13,6 +14,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     pagination_class = APIListPagination
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    filter_backends = ProductFilter
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = ProductFilter
     search_field = ['category', 'name', 'price', 'stock']
     ordering_fields = ['category', 'name', 'price']

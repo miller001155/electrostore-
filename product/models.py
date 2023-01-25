@@ -6,7 +6,7 @@ from core.validators import check_raiting
 
 
 class Category(AbstractDefaultModel):
-    name = models.CharField(max_length=255, db_index=True)
+    name = models.CharField(max_length=255, db_index=True, verbose_name='Категория')
     slug = models.SlugField(max_length=255, db_index=True, unique=True)
 
     class Meta:
@@ -34,17 +34,20 @@ class Product(AbstractDefaultModel):
     price = models.DecimalField(
         max_digits=9,
         decimal_places=2,
-        verbose_name='Цена'
+        verbose_name='Цена',
+        default=20,
     )
     currency = models.CharField(
-        max_length=3,
+        max_length=4,
         choices= Currency.choices,
-        default= Currency.BEL
+        default= Currency.BEL,
+        verbose_name='Валюта'
     )
     stock = models.CharField(
         max_length=12,
         choices=StockOfProduct.choices,
-        default=StockOfProduct.Storage
+        default=StockOfProduct.Storage,
+        verbose_name='Наличие'
     )
 
     class Meta:
@@ -60,7 +63,8 @@ class Raiting(AbstractDefaultModel):
     product = models.ForeignKey(
         Product,
         on_delete=models.PROTECT,
-        related_name='raiting'
+        related_name='raiting',
+        verbose_name='Рейтинг',
     )
 
     class Meta:

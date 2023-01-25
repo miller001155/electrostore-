@@ -1,5 +1,4 @@
 from django.contrib import admin, messages
-from django.conf.locale import sq
 from django.db.models import QuerySet
 
 from core.enams.product_enams import Currency
@@ -11,12 +10,16 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name',]
     ordering = ['name']
     search_fields = ['name']
+    prepopulated_fields = {'slug': ('name',)}
+    list_filter = ['name']
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['category', 'name', 'description', 'price', 'stock']
+    list_display = ['category', 'name', 'description', 'price','currency', 'stock']
     ordering = ['name']
     search_fields = ['category', 'name', 'price']
+    prepopulated_fields = {'slug': ('name',)}
+    list_filter = ['category', 'name', 'price', 'stock']
 
     @admin.action(description='Изменить валюту элементов на доллары США')
     def change_to_usd(self, request, qs: QuerySet):
@@ -29,7 +32,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Raiting)
 class RaitingAdmin(admin.ModelAdmin):
-    list_display = ['value', 'product']
+    list_display = ['product', 'value']
     ordering = ['value']
     search_fields = ['value']
 

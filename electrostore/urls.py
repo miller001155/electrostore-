@@ -16,9 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from clients.views import home
 from core.urls import router
+from users.views import ShowProfilePageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1', include(router.urls))
+    path('', home, name='Home'),
+    path('api/v1', include(router.urls)),
+    path('user_profile/<int:pk>/', ShowProfilePageView.as_view(), name='user_profile'),
+    path('api/v1/drf-auth/', include('rest_framework.urls')),
 ]
