@@ -1,7 +1,7 @@
 from django.db import models
 
 from core.abstract_models import AbstractDefaultModel
-from core.enams.product_enams import StockOfProduct
+from core.enams.product_enams import StockOfProduct, Currency
 from core.validators import check_raiting
 
 
@@ -36,8 +36,13 @@ class Product(AbstractDefaultModel):
         decimal_places=2,
         verbose_name='Цена'
     )
+    currency = models.CharField(
+        max_length=3,
+        choices= Currency.choices,
+        default= Currency.BEL
+    )
     stock = models.CharField(
-        max_length=15,
+        max_length=12,
         choices=StockOfProduct.choices,
         default=StockOfProduct.Storage
     )
